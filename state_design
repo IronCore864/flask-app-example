@@ -1,0 +1,30 @@
+state shape
+
+{
+	filterText: '',
+	partners: [{
+		name: 'tllsp1',
+		mtWindow: {
+			mon: '10:00-10:30',
+			tue: '10:00-10:30',
+			wed: '10:00-10:30',
+			thu: '10:00-10:30',
+			fri: '10:00-10:30',
+			sat: '10:00-10:30',
+			sun: '10:00-10:30'
+		},
+		selected: false
+	}, {
+		name: 'tlltg1',
+		mtWindow: {
+			mon: '11:00-11:30',
+			tue: '11:00-11:30',
+			wed: '11:00-11:30',
+			thu: '11:00-11:30',
+			fri: '11:00-11:30',
+			sat: '11:00-11:30',
+			sun: '11:00-11:30'
+		},
+		selected: false
+	}]
+}
