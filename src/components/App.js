@@ -1,11 +1,11 @@
 import React from 'react'
 import MtWindowEditor from './MtWindowEditor'
-import SearchBar from '../containers/SearchBar'
+import SearchBarContainer from '../containers/SearchBarContainer'
 import FilterablePartnerList from '../containers/FilterablePartnerList'
 
 const App = () => (
 	<div>
-		<SearchBar />
+		<SearchBarContainer />
 		<FilterablePartnerList />
 		<MtWindowEditor />
 	</div>

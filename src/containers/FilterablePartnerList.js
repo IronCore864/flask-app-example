@@ -1,15 +1,31 @@
-import React from 'react'
 import PartnerList from '../components/PartnerList'
+import { connect } from 'react-redux'
+import { togglePartner, cancelAllSelected, sortPartners } from '../actions'
 
-class FilterablePartnerList extends React.Component {
-	render() {
-		return (
-			<PartnerList
-				partners={this.props.partners}
-				filterText={this.state.filterText}
-			/>
-		)
-	}
+const mapStateToProps = (state) => {
+  return {
+    partners: state.partners,
+    filterText: state.filterText
+  }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onToggle: (partner) => {
+      dispatch(togglePartner(partner))
+    },
+    onToggleCancelAll: () => {
+      dispatch(cancelAllSelected())
+    },
+    onSortPartners: (order) => {
+      dispatch(sortPartners(order))
+    }
+  }
+}
+
+const FilterablePartnerList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PartnerList)
 
 export default FilterablePartnerList

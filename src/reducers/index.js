@@ -1,36 +1,9 @@
 import { combineReducers } from 'redux'
-import { UPDATE_MT_TIME, TOGGLE_PARTNER, SET_FILTER_TEXT } from '../actions'
+import { UPDATE_MT_TIME, TOGGLE_PARTNER, SET_FILTER_TEXT, CANCLE_ALL_SELECTED, SORT_PARTNERS } from '../actions'
 
-// only for testing without ui
-const test_default = [{
-	name: 'tllsp1',
-	mtWindow: {
-		mon: '10:00-10:30',
-		tue: '10:00-10:30',
-		wed: '10:00-10:30',
-		thu: '10:00-10:30',
-		fri: '10:00-10:30',
-		sat: '10:00-10:30',
-		sun: '10:00-10:30'
-	},
-	selected: false
-}, {
-	name: 'tlltg1',
-	mtWindow: {
-		mon: '11:00-11:30',
-		tue: '11:00-11:30',
-		wed: '11:00-11:30',
-		thu: '11:00-11:30',
-		fri: '11:00-11:30',
-		sat: '11:00-11:30',
-		sun: '11:00-11:30'
-	},
-	selected: false
-}]
-
-const partners = (state = test_default, action) => {
+const partners = (state = [], action) => {
 	switch (action.type) {
-		case 'UPDATE_MT_TIME':
+		case UPDATE_MT_TIME:
 			return state.map((partner, index) => {
 				if (partner.selected) {
 					return Object.assign({}, partner, {
@@ -40,7 +13,7 @@ const partners = (state = test_default, action) => {
 				}
 				return partner
 			})
-		case 'TOGGLE_PARTNER':
+		case TOGGLE_PARTNER:
 			return state.map((partner, index) => {
 				if (partner.name === action.partner) {
 					return Object.assign({}, partner, {
@@ -49,13 +22,25 @@ const partners = (state = test_default, action) => {
 				}
 				return partner
 			})
+		case CANCLE_ALL_SELECTED:
+			var toggle_status = state[0].selected === true ? false : true
+			return state.map((partner, index) => {
+				return Object.assign({}, partner, {
+					selected: !toggle_status
+				})
+			})
+		case SORT_PARTNERS:
+			if (action.order) {
+				return [...state].sort((a, b) => a['name'] < b['name'])
+			}
+			return [...state].sort((a, b) => a['name'] > b['name'])
 		default:
 			return state
 	}
 }
 
 
-const textFilter = (state = '', action) => {
+const filterText = (state = '', action) => {
 	switch (action.type) {
 		case SET_FILTER_TEXT:
 			return action.text
@@ -66,7 +51,7 @@ const textFilter = (state = '', action) => {
 
 const parterMtWinApp = combineReducers({
 	partners,
-	textFilter
+	filterText
 })
 
 export default parterMtWinApp

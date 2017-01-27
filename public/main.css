@@ -1,0 +1,59 @@
+div#root {
+  width: 1200px;
+  margin: auto;
+  padding-top: 50px;
+}
+.filter {
+  padding-bottom: 20px;
+}
+.partners {
+  border-collapse: collapse;
+}
+.partners thead th {
+  background-color: #274287;
+  color: white;
+}
+.partners thead th.time {
+  width: 120px;
+  text-align: left;
+}
+.partners thead th.select {
+  width: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+.partners thead th.partner {
+  width: 50px;
+  text-align: left;
+}
+.partners thead th,
+.partners thead td {
+  padding: 4px;
+  border-bottom: 1px solid #ddd;
+}
+.partners tbody tr td {
+  padding: 4px;
+  border-bottom: 1px solid #ddd;
+}
+.partners tbody tr:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+.partners tbody tr td.select {
+  text-align: center;
+}
+div.newTime {
+  padding-top: 20px;
+}
+div.newTime span.label {
+  width: 100px;
+  display: inline-block;
+  text-align: center;
+}
+div.newTime form {
+  display: inline;
+}
+div.newTime form input {
+  margin: 4px;
+  width: 120px;
+}
