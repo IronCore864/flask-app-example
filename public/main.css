@@ -63,4 +63,5 @@ div.newTime form {
 div.newTime form input {
   margin: 4px;
   width: 112px;
+  box-sizing: border-box;
 }
