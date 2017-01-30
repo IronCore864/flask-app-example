@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { UPDATE_MT_TIME, TOGGLE_PARTNER, SET_FILTER_TEXT, CANCLE_ALL_SELECTED, SORT_PARTNERS } from '../actions'
+import { UPDATE_MT_TIME, TOGGLE_PARTNER, SET_FILTER_TEXT, CANCLE_ALL_SELECTED, SORT_PARTNERS, RECEIVE_PARTNERS } from '../actions'
 
 const partners = (state = [], action) => {
 	switch (action.type) {
@@ -34,6 +34,8 @@ const partners = (state = [], action) => {
 				return [...state].sort((a, b) => a['name'] < b['name'])
 			}
 			return [...state].sort((a, b) => a['name'] > b['name'])
+		case RECEIVE_PARTNERS:
+			return action.json;
 		default:
 			return state
 	}
