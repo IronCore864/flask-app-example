@@ -3,11 +3,27 @@ export const TOGGLE_PARTNER = 'TOGGLE_PARTNER'
 export const SET_FILTER_TEXT = 'SET_FILTER_TEXT'
 export const CANCLE_ALL_SELECTED = 'CANCLE_ALL_SELECTED'
 export const SORT_PARTNERS = 'SORT_PARTNERS'
-export const REQUEST_PARTNERS = 'REQUEST_PARTNERS'
 export const RECEIVE_PARTNERS = 'RECEIVE_PARTNERS'
 
+// asyc actions
+export const REQUEST_PARTNERS = 'REQUEST_PARTNERS'
+export const UPDATE_PARTNERS = 'UPDATE_PARTNERS'
+
+
 export function updateMtTime(time) {
-	return { type: UPDATE_MT_TIME, time }
+	return (dispatch, getState) => {
+		dispatch({ type: UPDATE_MT_TIME, time })
+		return fetch('http://127.0.0.1:5000/partners', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+				'Content-Type': 'application/json; charset=utf-8'
+			},
+			body: JSON.stringify(getState().partners)
+			})
+			.then(response => response.json())
+			.then(json => console.log(json))
+	}
 }
 
 export function togglePartner(partner) {

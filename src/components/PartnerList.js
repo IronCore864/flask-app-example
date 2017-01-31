@@ -13,6 +13,12 @@ class PartnerList extends React.Component {
 	componentDidMount() {
 		const { dispatch } = this.props
 		dispatch(fetchPartners())
+		this.startPoll()
+	}
+
+	startPoll() {
+		const { dispatch } = this.props
+		this.timeout = setTimeout(() => dispatch(fetchPartners()), 30000);
 	}
 
 	handleSort() {
