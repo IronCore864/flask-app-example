@@ -12,6 +12,16 @@ export const UPDATE_PARTNERS = 'UPDATE_PARTNERS'
 
 export function updateMtTime(time) {
 	return (dispatch, getState) => {
+		var selected_parters = []
+		var partners = getState().partners
+		for (var i=0; i < partners.length; i++) {
+			if (partners[i].selected) {
+				selected_parters.push(Object.assign({}, partners[i], {
+					mtWindow: time,
+					selected: false,
+				}))
+			}
+		}
 		dispatch({ type: UPDATE_MT_TIME, time })
 		return fetch('http://127.0.0.1:5000/partners', {
 			method: 'POST',
@@ -19,7 +29,7 @@ export function updateMtTime(time) {
 				'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
 				'Content-Type': 'application/json; charset=utf-8'
 			},
-			body: JSON.stringify(getState().partners)
+			body: JSON.stringify(selected_parters)
 			})
 			.then(response => response.json())
 			.then(json => console.log(json))

@@ -18,7 +18,7 @@ class PartnerList extends React.Component {
 
 	startPoll() {
 		const { dispatch } = this.props
-		this.timeout = setTimeout(() => dispatch(fetchPartners()), 30000);
+		this.timeout = setTimeout(() => dispatch(fetchPartners()), 300000);
 	}
 
 	handleSort() {

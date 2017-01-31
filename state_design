@@ -12,8 +12,7 @@ state shape
 			fri: '10:00-10:30',
 			sat: '10:00-10:30',
 			sun: '10:00-10:30'
-		},
-		selected: false
+		}
 	}, {
 		name: 'tlltg1',
 		mtWindow: {
@@ -24,7 +23,6 @@ state shape
 			fri: '11:00-11:30',
 			sat: '11:00-11:30',
 			sun: '11:00-11:30'
-		},
-		selected: false
+		}
 	}]
 }
