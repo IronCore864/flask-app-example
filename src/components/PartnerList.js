@@ -1,25 +1,31 @@
 import React from 'react'
 import PartnerRow from './PartnerRow'
+import { fetchPartners } from '../actions'
 
 class PartnerList extends React.Component {
 	constructor(props) {
-    super(props)
-    this.state = {order: true}
-    this.handleToggleAllVisible = this.handleToggleAllVisible.bind(this)
-    this.handleSort = this.handleSort.bind(this)
-  }
+		super(props)
+		this.state = {order: true}
+		this.handleToggleAllVisible = this.handleToggleAllVisible.bind(this)
+		this.handleSort = this.handleSort.bind(this)
+	}
 
-  handleSort() {
-  	this.props.onSortPartners(this.state.order)
-  	this.setState(
-  		{order: !this.state.order}
-  	)
-  }
+	componentDidMount() {
+		const { dispatch } = this.props
+		dispatch(fetchPartners())
+	}
 
-  handleToggleAllVisible() {
-  	var none_selected = true
-  	var all_selected = true
-  	this.props.partners.forEach((partner) => {
+	handleSort() {
+		this.props.onSortPartners(this.state.order)
+		this.setState(
+			{order: !this.state.order}
+		)
+	}
+
+	handleToggleAllVisible() {
+		var none_selected = true
+		var all_selected = true
+		this.props.partners.forEach((partner) => {
 			if (partner.name.indexOf(this.props.filterText) === -1) {
 				return;
 			}
@@ -35,13 +41,13 @@ class PartnerList extends React.Component {
 					return;
 				}
 				this.props.onToggle(
-	    		partner.name
-	  		)
+				partner.name
+			)
 			})
 		} else {
 			this.props.onToggleCancelAll()
 		}
-  }
+	}
 
 	render() {
 		var rows = [];

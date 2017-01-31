@@ -19,7 +19,8 @@ const mapDispatchToProps = (dispatch) => {
     },
     onSortPartners: (order) => {
       dispatch(sortPartners(order))
-    }
+    },
+    dispatch
   }
 }
 
