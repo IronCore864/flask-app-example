@@ -11,6 +11,7 @@ div#root {
 }
 .partners {
   border-collapse: collapse;
+  width: 1200px;
 }
 .partners thead th {
   background-color: #274287;
@@ -65,4 +66,25 @@ div.newTime form input {
   margin: 4px;
   width: 112px;
   box-sizing: border-box;
+}
+div.navigator {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+div.navigator div.page {
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  margin: 1px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+div.navigator div.page-selected {
+  background-color: lightblue;
+}
+div.navigator div.disable {
+  cursor: default;
+  color: grey;
 }
