@@ -1,13 +1,17 @@
 import React from 'react'
 import PartnerRow from './PartnerRow'
+import MtWindowEditor from '../containers/MtWindowEditor'
 import { fetchPartners } from '../actions'
 
 class PartnerList extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {order: true}
+		this.state = {order: true, selected: []}
 		this.handleToggleAllVisible = this.handleToggleAllVisible.bind(this)
 		this.handleSort = this.handleSort.bind(this)
+		this.handleToggle = this.handleToggle.bind(this)
+		this.handleToggleCancelAll = this.handleToggleCancelAll.bind(this)
+		this.handleSelectAll = this.handleSelectAll.bind(this)
 	}
 
 	componentDidMount() {
@@ -21,37 +25,51 @@ class PartnerList extends React.Component {
 		this.timeout = setTimeout(() => dispatch(fetchPartners()), 300000);
 	}
 
-	handleSort() {
-		this.props.onSortPartners(this.state.order)
+	handleToggle(partner_name) {
+		var new_selected = [...this.state.selected]
+		var idx = new_selected.indexOf(partner_name);
+		if (idx > -1) {
+			new_selected.splice(idx, 1)
+		} else {
+			new_selected.push(partner_name)
+		}
 		this.setState(
-			{order: !this.state.order}
+			{order: this.state.order, selected: new_selected}
 		)
 	}
 
-	handleToggleAllVisible() {
-		var none_selected = true
-		var all_selected = true
+	handleToggleCancelAll() {
+		this.setState(
+			{order: this.state.order, selected: []}
+		)	
+	}
+
+	handleSelectAll() {
+		var all_visible_partners = []
 		this.props.partners.forEach((partner) => {
 			if (partner.name.indexOf(this.props.filterText) === -1) {
 				return;
 			}
-			if (partner.selected) {
-				none_selected = false
-			} else {
-				all_selected = false
-			}
+			all_visible_partners.push(partner.name)
 		})
-		if (none_selected || all_selected) {
-			this.props.partners.forEach((partner) => {
-				if (partner.name.indexOf(this.props.filterText) === -1) {
-					return;
-				}
-				this.props.onToggle(
-				partner.name
-			)
-			})
+		this.setState(
+			{order: this.state.order, selected: all_visible_partners}
+		)
+	}
+
+	handleSort() {
+		this.props.onSortPartners(this.state.order)
+		this.setState(
+			{order: !this.state.order, selected: this.state.selected}
+		)
+	}
+
+	handleToggleAllVisible() {
+		var none_selected = this.state.selected.length === 0 ? true : false
+		if (none_selected) {
+			this.handleSelectAll()
 		} else {
-			this.props.onToggleCancelAll()
+			this.handleToggleCancelAll()
 		}
 	}
 
@@ -65,10 +83,12 @@ class PartnerList extends React.Component {
 				<PartnerRow
 					partner={partner}
 					key={partner.name}
-					onToggle={this.props.onToggle}
+					selected={this.state.selected.indexOf(partner.name) > -1 ? true : false}
+					onToggle={this.handleToggle}
 				/>);
 		});
 		return (
+		<div>
 			<table className='partners'>
 				<thead>
 					<tr>
@@ -85,6 +105,8 @@ class PartnerList extends React.Component {
 				</thead>
 				<tbody>{rows}</tbody>
 			</table>
+			<MtWindowEditor selected={this.state.selected} cancelSelection={this.handleToggleCancelAll} />
+		</div>
 		)
 	}
 }

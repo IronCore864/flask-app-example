@@ -16,7 +16,7 @@ class PartnerRow extends React.Component {
 		return (
 			<tr onClick={this.handleToggleCheck}>
 				<td className='select'>
-					{this.props.partner.selected === true ? <i className="fa fa-check" aria-hidden="true"></i> : ''}
+					{this.props.selected === true ? <i className="fa fa-check" aria-hidden="true"></i> : ''}
 				</td>
 				<td className='partner'>{this.props.partner.name}</td>
 				<td className='time'>{this.props.partner.mtWindow.mon}</td>

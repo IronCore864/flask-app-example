@@ -1,6 +1,6 @@
 import PartnerList from '../components/PartnerList'
 import { connect } from 'react-redux'
-import { togglePartner, cancelAllSelected, sortPartners } from '../actions'
+import { sortPartners } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -11,12 +11,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onToggle: (partner) => {
-      dispatch(togglePartner(partner))
-    },
-    onToggleCancelAll: () => {
-      dispatch(cancelAllSelected())
-    },
     onSortPartners: (order) => {
       dispatch(sortPartners(order))
     },
