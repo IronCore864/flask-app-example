@@ -85,7 +85,7 @@ class PartnerList extends React.Component {
 
 	render() {
 		var all_visible_rows = []
-		const rows_per_page = 30
+		const rows_per_page = 25
 		this.props.partners.forEach((partner) => {
 			if (partner.name.indexOf(this.props.filterText) === -1) {
 				return
@@ -99,7 +99,7 @@ class PartnerList extends React.Component {
 				/>)
 		})
 		var page_numbers = Math.ceil(all_visible_rows.length / rows_per_page)
-		var start = (this.state.page -1 ) * 30
+		var start = (this.state.page -1 ) * rows_per_page
 		var rows = all_visible_rows.slice(start, start+rows_per_page)
 		return (
 		<div>
