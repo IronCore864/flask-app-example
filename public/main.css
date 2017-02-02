@@ -78,6 +78,7 @@ div.navigator {
 div.navigator div.page {
   height: 20px;
   width: 20px;
+  padding: 0 5px;
   text-align: center;
   cursor: pointer;
 }
