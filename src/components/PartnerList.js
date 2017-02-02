@@ -47,8 +47,6 @@ class PartnerList extends React.Component {
 	}
 
 	handleSelectPage(pageNum) {
-		console.log(pageNum)
-		console.log(this.state)
 		this.setState(
 			{order: this.state.order, selected: this.state.selected, page: parseInt(pageNum, 10)}
 		)
@@ -80,6 +78,12 @@ class PartnerList extends React.Component {
 			this.handleSelectAll()
 		} else {
 			this.handleToggleCancelAll()
+		}
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.filterText !== this.props.filterText) {
+			this.setState({order: prevState.order, selected: prevState.selected, page: 1})
 		}
 	}
 

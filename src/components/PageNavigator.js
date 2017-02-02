@@ -10,6 +10,15 @@ class PageNavigator extends React.Component {
 		this.state = { start: 1, end: 5, selected: 1 }
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		// prevState.selected === this.state.selected means no one is clicking the labels
+		// however prevProps.selected !== this.props.selected means filterText is updated so PartnerList updated props
+		// in this case, reset page to 1
+		if (prevProps.selected !== this.props.selected && prevState.selected === this.state.selected) {
+			this.setState({ start: 1, end: 5, selected: 1 })
+		}
+	}
+
 	handleSelectPage(pageNum) {
 		this.setState({start: this.state.start, end: this.state.end, selected: pageNum})
 		this.props.handleSelectPage(pageNum)
@@ -32,6 +41,10 @@ class PageNavigator extends React.Component {
 
 	handleJumpForwardSection() {
 		var start = this.state.end+1
+		if (start > parseInt(this.props.totalPages, 10)) {
+			this.handleJumpToEnding()
+			return
+		}
 		var end = Math.min(start+4, parseInt(this.props.totalPages, 10))
 		this.setState({start: start, end: end, selected: start})
 		this.props.handleSelectPage(start)
