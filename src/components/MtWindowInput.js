@@ -38,17 +38,23 @@ class MtWindowInput extends React.Component {
 		var inputs = []
 		for (var i=0;i<7;i++){
 			inputs.push(
-				<input name={i} key={i} type="text" value={this.state.time[i]} onChange={this.handleChange} />
+				<td key={i}>
+					<input className='time' name={i} key={i} type="text" value={this.state.time[i]} onChange={this.handleChange} />
+				</td>
 			)
 		}
 		return (
-			<div className='newTime'>
-				<span className='label'>New Time: </span>
-				<form onSubmit={this.handleSubmit}>
-					{inputs}
-					<button type='submit'>Apply</button>
-				</form>
-			</div>
+			<form onSubmit={this.handleSubmit}>
+				<table className='newTime'>
+				<tbody>
+					<tr>
+						<td className='label'>New Time: </td>
+						{inputs}
+					</tr>
+				</tbody>
+				</table>
+				<div className='submit-btn'><button type='submit'>Apply</button></div>
+			</form>
 		)
 	}
 }

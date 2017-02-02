@@ -14,11 +14,11 @@ class PartnerRow extends React.Component {
 
 	render() {
 		return (
-			<tr onClick={this.handleToggleCheck}>
-				<td className='select'>
+			<tr>
+				<td className='select' onClick={this.handleToggleCheck}>
 					{this.props.selected === true ? <i className="fa fa-check" aria-hidden="true"></i> : ''}
 				</td>
-				<td className='partner'>{this.props.partner.name}</td>
+				<td className='partner' onClick={this.handleToggleCheck}>{this.props.partner.name}</td>
 				<td className='time'>{this.props.partner.mtWindow.mon}</td>
 				<td className='time'>{this.props.partner.mtWindow.tue}</td>
 				<td className='time'>{this.props.partner.mtWindow.wed}</td>
