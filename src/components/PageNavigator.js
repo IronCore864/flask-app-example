@@ -44,8 +44,8 @@ class PageNavigator extends React.Component {
 
 	render() {
 		var pages = []
-		pages.push(<div className='page' key='start' onClick={this.handleJumpToBeginning}>{"<<"}</div>)
-		pages.push(<div className={'page ' + (this.state.start === 1 ? 'disable' : '')} key='prev' onClick={this.state.start !== 1? this.handleJumpBackwardSection : ''}>{"<"}</div>)
+		pages.push(<div className={'page ' + (this.state.start === 1 ? 'disable' : '')} key='start' onClick={this.state.start !== 1 ? this.handleJumpToBeginning : ''}><i className="fa fa-fast-backward" aria-hidden="true"></i></div>)
+		pages.push(<div className={'page ' + (this.state.start === 1 ? 'disable' : '')} key='prev' onClick={this.state.start !== 1 ? this.handleJumpBackwardSection : ''}><i className="fa fa-arrow-left" aria-hidden="true"></i></div>)
 		for (var i=this.state.start;i<=Math.min(this.state.end, this.props.totalPages);i++) {
 			if (i === this.state.selected) {
 				pages.push(<div className='page page-selected' key={i} onClick={this.handleSelectPage.bind(this, i)}>{i}</div>)
@@ -53,8 +53,8 @@ class PageNavigator extends React.Component {
 				pages.push(<div className='page' key={i} onClick={this.handleSelectPage.bind(this, i)}>{i}</div>)
 			}
 		}
-		pages.push(<div className={'page ' + (this.state.end === parseInt(this.props.totalPages, 10) ? 'disable' : '')} key='next' onClick={this.state.end !== parseInt(this.props.totalPages, 10)? this.handleJumpForwardSection : ''}>{">"}</div>)
-		pages.push(<div className='page' key='end' onClick={this.handleJumpToEnding}>{">>"}</div>)
+		pages.push(<div className={'page ' + (this.state.end === parseInt(this.props.totalPages, 10) ? 'disable' : '')} key='next' onClick={this.state.end !== parseInt(this.props.totalPages, 10) ? this.handleJumpForwardSection : ''}><i className="fa fa-arrow-right" aria-hidden="true"></i></div>)
+		pages.push(<div className={'page ' + (this.state.end === parseInt(this.props.totalPages, 10) ? 'disable' : '')} key='end' onClick={this.state.end !== parseInt(this.props.totalPages, 10) ? this.handleJumpToEnding : ''}><i className="fa fa-fast-forward" aria-hidden="true"></i></div>)
 		return (
 			<div className='navigator'>
 				{pages}
