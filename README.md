@@ -1,10 +1,10 @@
 # Intro
-Frontend webpage for partners maintenance window
-react-redux in es6+ less
+
+react-redux in es6+ less example.
+A sortable table.
 
 # Dev Info
 
 Compile less: gulp watch-less
 Build: npm run build
 Deploy: setup http server to serve build/
-
